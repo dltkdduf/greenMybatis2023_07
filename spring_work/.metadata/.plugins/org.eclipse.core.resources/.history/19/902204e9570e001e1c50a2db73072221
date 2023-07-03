@@ -1,0 +1,66 @@
+package aop_device;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+
+import aop_anno.model.PhImg;
+
+@ComponentScan(basePackages = "aop_anno")
+@EnableAspectJAutoProxy
+@Aspect
+public class AopConfig2 {
+
+	
+	@Pointcut("execution(String *(..))")
+	void retString() {}
+	
+	@Pointcut("execution(* ph*(..))")
+	void phStart() {}
+	
+	
+	@AfterReturning(pointcut = "phStart()")
+	void afPhoto(JoinPoint jp) {
+		System.out.println("afPhoto:"+jp.getSignature().toString());	
+	}
+	
+	@AfterReturning(pointcut = "retString()")
+	void afStringRet(JoinPoint jp) {
+		System.out.println("afStringRet:"+jp.getSignature().toString());	
+	}
+	@AfterReturning(pointcut = "phStart() || retString()")
+	void afOr(JoinPoint jp) {
+		System.out.println("afOr:"+jp.getSignature().toString());	
+	}
+	@AfterReturning(pointcut = "phStart() && retString()")
+	void afAnd(JoinPoint jp) {
+		System.out.println("afAnd:"+jp.getSignature().toString());	
+	}
+	
+	@AfterReturning(pointcut = "execution(!String *(..))")
+	void afStringNot(JoinPoint jp) {
+		System.out.println("afStringNot:"+jp.getSignature().toString());	
+	}
+	
+	@AfterReturning(pointcut = "execution(* *(String))")
+	void paramString(JoinPoint jp) {
+		System.out.println("paramString:"+jp.getSignature().toString());	
+	}
+	
+	@AfterReturning(pointcut = "args(dst)")
+	void args_dst(JoinPoint jp, String dst) {
+		System.out.println("args_dst:"+jp.getSignature().toString());
+		System.out.println("dst:"+dst);
+	}
+	
+	@AfterReturning(pointcut = "args(obj)")
+	void args_Object(JoinPoint jp, Object obj) {
+		System.out.println("args_Object:"+jp.getSignature().toString());
+		System.out.println("obj:"+obj);
+	}
+}

@@ -1,0 +1,17 @@
+package com.example.demo.model;
+
+import java.util.ArrayList;
+import java.util.TreeSet;
+
+public class StudList {
+
+	ArrayList<Stud> stList;
+	TreeSet<Stud> stSet;
+	public void rankCalc() {
+		for (Stud st : stList) {
+			st.setRank(stList);
+		}
+		
+		stSet = new TreeSet(stList);
+	}
+}

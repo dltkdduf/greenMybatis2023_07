@@ -1,0 +1,18 @@
+package com.example.demo.control;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class ParamRedirectController {
+
+	@RequestMapping("/basic/param_1")
+	public String param_1(@RequestParam("pid")String pid,
+			@RequestParam("age")int nai,
+			boolean marriage) {
+		
+		System.out.println("param_1:"+pid+","+nai+","+marriage);
+		return "basic/param";
+	}
+}

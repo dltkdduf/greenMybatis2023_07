@@ -1,0 +1,33 @@
+package com.example.demo.model;
+
+import java.util.ArrayList;
+
+public class Kimgane {
+
+	ArrayList<Gimbab> gbbs;
+	
+	GimAddress gAddr;
+
+	public ArrayList<Gimbab> getGbbs() {
+		return gbbs;
+	}
+
+	public void setGbbs(ArrayList<Gimbab> gbbs) {
+		this.gbbs = gbbs;
+	}
+
+	public GimAddress getgAddr() {
+		return gAddr;
+	}
+
+	public void setgAddr(GimAddress gAddr) {
+		this.gAddr = gAddr;
+	}
+
+	@Override
+	public String toString() {
+		return "Kimgane [gbbs=" + gbbs + ", gAddr=" + gAddr + "]";
+	}
+	
+	
+}

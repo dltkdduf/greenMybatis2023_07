@@ -1,0 +1,48 @@
+package com.example.demo.control;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.demo.model.Member;
+
+@Controller
+public class Path_2Controller {
+
+	@RequestMapping("/path1/view1") //고정값이 우선순위가 높다.
+	String pathView1(Model mm) {
+		System.out.println("path1View1 실행");
+		mm.addAttribute("title","view1");
+		return "path/view1";
+	}
+	
+	@RequestMapping("/path1/{depth1}")
+	String pathDepth1(Model mm, @PathVariable String depth1) {
+		System.out.println("path1Depth1 실행:"+depth1);
+		mm.addAttribute("title","depth1");
+		return "path/view1";
+	}
+	
+	
+	@RequestMapping("/path1/{depth1}/list")
+	String pathList(Model mm, @PathVariable String depth1) {
+		System.out.println("path1List 실행:"+depth1);
+		mm.addAttribute("title","list");
+		return "path/view1";
+	}
+	
+	@RequestMapping("/path1/{depth1}/{depth2}")
+	String pathDepth2(Model mm, @PathVariable String depth1, @PathVariable int depth2) {
+		System.out.println("path1Depth2 실행:"+depth1+","+depth2);
+		mm.addAttribute("title","depth2");
+		return "path/view1";
+	}
+	
+	@RequestMapping("/path1/{pname}/{age}/{marriage}")
+	String pathMember(Model mm, Member mem) {
+		System.out.println("path1Member 실행:"+mem);
+		mm.addAttribute("title","member");
+		return "path/view1";
+	}
+}

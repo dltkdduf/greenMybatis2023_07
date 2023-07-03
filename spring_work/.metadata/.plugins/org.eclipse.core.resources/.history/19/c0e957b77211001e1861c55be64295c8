@@ -1,0 +1,79 @@
+package com.example.demo.control;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.demo.model.Gimbab;
+import com.example.demo.model.Member;
+import com.example.demo.model.Stud;
+
+@Controller
+public class ModelController {
+
+	@ModelAttribute //attribute 이름은 리턴 클래스 의 bean 이름
+	                //member
+					//메소드 이름과 상관없음
+	Member member_1() {
+		return new Member("박찬빈", 25, false);
+	}
+	
+	@ModelAttribute("mem2")  //같은 이름이라 누가 출력될지 신뢰할 수 없음
+	Member member_2() {
+	return new Member("박더운빈", 27, true);
+	}
+	
+	@ModelAttribute("mem2") //같은 이름으로 attribute 지정시 어느 것이 나중에 매핑될지 모름
+							// 절대 중첩시키지 말 것
+	  						//같은 이름이라 누가 출력될지 신뢰할 수 없음
+	Member member_22() {
+		return new Member("박빈빈", 33, false);
+	}
+	
+	@ModelAttribute("mem3")  //attribute 이름 지정 -mem3
+	Member member_3() {
+		return new Member("중간빈", 41, true);
+	}
+	
+	@ModelAttribute("mem4")  //attribute : mem4,  stud  2개 지정
+	Member member_4(Stud st) {
+		return new Member("박뜨거운빈", 51, true);
+	}
+	
+	@ModelAttribute
+	Object gimmm_1() { //attribute 이름 :  gimbab 임, object 아님
+						//메소드의 리턴 타입이 아닌 리턴 객체 클래스명을 attribute 이름으로 지정
+		return new Gimbab("참치김밥", 4000, 2);
+	}
+	
+	@ModelAttribute("gb2")
+	Object gimmm_2(String name, @RequestParam(value = "price", defaultValue = "1500") int price) {
+		return new Gimbab(name, price, 1);
+	}
+	
+	
+	//@ModelAttribute("gb3")  멤버변수에 ModelAttribute 지정 불가
+	Gimbab gb3 = new Gimbab("멸치김밥", 2700, 2);
+	
+	
+	@RequestMapping("/model/model_1")
+	String model_1(Model mm) {
+		mm.addAttribute("title","model_1");
+		return "model/view";
+	}
+	
+	@RequestMapping("/model/model_2")
+	String model_2(Model mm) {
+		mm.addAttribute("title","model_2");
+		mm.addAttribute("st1",new Stud("조민기", 91,87,76));
+		return "model/view";
+	}
+	
+	@RequestMapping("/model/model_3")
+	String model_3(Model mm) {
+		mm.addAttribute("title","model_3");
+		return "model/view";
+	}
+}

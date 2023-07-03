@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>control</title>
+</head>
+<body>
+<h1>control</h1>
+<h2>if</h2>
+<th:block th:with="a=30">
+a:[[${a}]]<br/>
+th:if="${a >= 20}" : <span th:text="'20이상'" th:if="${a >= 20}"/><br/>
+th:if="${a >= 40}" : <span th:text="'40이상'" th:if="${a >= 40}"/><br/>
+</th:block>
+
+
+</body>
+</html>

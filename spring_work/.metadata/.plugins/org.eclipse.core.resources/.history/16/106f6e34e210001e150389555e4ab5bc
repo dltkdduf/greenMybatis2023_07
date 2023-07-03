@@ -1,0 +1,66 @@
+package com.example.demo.model;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public class Member {
+//아이디,이름,전화번호,나이,사진,이력서
+	String pname;
+	int age;
+	boolean marriage;
+	
+	
+	public Member() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+	public boolean isMarriage() {
+		return marriage;
+	}
+
+
+
+	public void setMarriage(boolean marriage) {
+		this.marriage = marriage;
+	}
+
+
+
+	
+	
+	
+	
+	public Member(String pname, int age, boolean marriage) {
+		super();
+		this.pname = pname;
+		this.age = age;
+		this.marriage = marriage;
+	}
+
+
+
+	
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Member [pname=" + pname + ", age=" + age + ", marriage=" + marriage + "]";
+	}
+
+
+	
+}

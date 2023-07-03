@@ -1,0 +1,32 @@
+package com.example.demo.control;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
+
+@Controller
+public class CookieController {
+
+	@RequestMapping("/cookie/make")
+	String make(HttpServletResponse response, Model mm) {
+		Cookie coo = new Cookie("pid", "aaa");
+		response.addCookie(coo);
+		response.addCookie(new Cookie("age", "27"));
+		mm.addAttribute("msg", "쿠키생성");
+		return "cookie/view";
+	}
+	
+	@RequestMapping("/cookie/view")
+	String view(@CookieValue(value="pid")String pid,
+				@CookieValue(value="age")int nai, 
+				@CookieValue(value="height", defaultValue = "180.36")double hh,Model mm) {
+		System.out.println("view:"+pid+","+(nai-2)+","+hh);
+		mm.addAttribute("msg", "쿠키보기");
+		return "cookie/view";
+	}
+}

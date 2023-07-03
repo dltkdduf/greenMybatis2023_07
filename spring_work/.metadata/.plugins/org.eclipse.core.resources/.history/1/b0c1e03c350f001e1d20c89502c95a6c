@@ -1,0 +1,28 @@
+<%@page import="com.example.demo.model.Member"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>sharkComplete</title>
+</head>
+<body>
+<h1>sharkComplete</h1>
+<% Member member = (Member)request.getAttribute("member"); %>
+<table border="">
+	<tr>
+		<td>pid</td>
+		<td><%=member.getPid() %></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+</table>
+</body>
+</html>

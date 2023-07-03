@@ -1,0 +1,76 @@
+package com.example.demo.control;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.demo.model.Member;
+
+
+
+@Controller
+public class RedirectController {
+
+	@RequestMapping("/basic/re_1")
+	public String reeee_1(Model mm) {
+		
+		mm.addAttribute("msg", "나 간다");
+		mm.addAttribute("goUrl", "/");
+		return "basic/alert";
+	}
+	
+	@RequestMapping("/basic/re_2")
+	public String reeee_2(Model mm) {
+		
+		System.out.println("reeee_2 실행");
+		return "/";   //redirect 가 아님 view page 를 forwarding 시도하여 에러발생
+	}
+	@RequestMapping("/basic/re_3")
+	public String reeee_3() {
+		
+		System.out.println("reeee_3 실행");
+		return "redirect:../dst";   //redirect 진행 -->  view page 진입안함
+									//현재 url을 기준으로 상대주소로 처리하거나 절대주소 처리할 것
+	}
+	
+	@RequestMapping("/basic/re_4")
+	public String reeee_4() {
+		
+		System.out.println("reeee_4 실행");
+		String pname="";
+		try {
+			pname = URLEncoder.encode("이공","utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:../dst?pname="+pname+"&age=19&marriage=false";   
+	}
+	@RequestMapping("/basic/re_5")
+	public String reeee_5(Model mm) {
+		
+		System.out.println("reeee_5 실행");
+		
+		String pname="";
+		try {
+			pname = URLEncoder.encode("팔공","utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mm.addAttribute("pname", pname);
+		mm.addAttribute("age", 21);
+		mm.addAttribute("marriage", true);
+		return "redirect:../dst";   
+	}
+	
+	@RequestMapping("dst")
+	public String dst(Member mem) {
+		
+		System.out.println("dst 실행");
+		return "basic/dst";
+	}
+}

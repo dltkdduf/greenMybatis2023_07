@@ -1,0 +1,14 @@
+package aop_anno;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+
+@Aspect
+public class AnnoDevice {
+
+	@Around("* *..call(..)")
+	void arounddd(JoinPoint jp) {
+		System.out.println("arounddd:"+jp.getSignature().toString());
+	}
+}

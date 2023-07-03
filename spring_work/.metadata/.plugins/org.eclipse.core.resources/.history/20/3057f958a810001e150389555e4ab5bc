@@ -1,0 +1,71 @@
+package com.example.demo.control;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.example.demo.model.Member;
+import com.example.demo.model.MemberData;
+
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
+
+@Controller
+public class MemberLoginController {
+	/*
+	 
+	  쿠키 기반의 로그인 로그아웃을 구현해주세요
+	  페이지: 로그인메인화면,로그아웃,로그인처리
+	  회원정보
+	  id  name  pw
+	  aaa 장동건 1111
+	  bbb 장서건 2222
+	  ccc 장동건 3333
+	  ddd 장남건 1111
+	  eee 북두신건 3333
+	  
+	  로그인시 확인 정보 : 아이디 , 암호
+	  로그인후 노출 정보 : 아이디 , 이름
+	  로그아웃 노출 정보 : 이름
+	  
+	 **/
+	@Resource
+	MemberData md;
+	
+	@RequestMapping(value = "/cookie/login", method = RequestMethod.GET)
+	public String loginMain(Model mm, 
+			@CookieValue(value="pid", defaultValue = "null")String pid,
+			@CookieValue(value="pname", defaultValue = "null")String pname) {
+		
+		System.out.println(pid+","+pname);
+		if(pid.equals("null")) {
+			mm.addAttribute("pid", pid);
+			mm.addAttribute("pname", pname);
+		}
+		return "cookie/login";
+	}
+	
+	@RequestMapping(value = "/cookie/login", method = RequestMethod.POST)
+	public String loginReg(HttpServletResponse response, Member mem, Model mm) {
+		String msg =  "로그인실패";
+		
+		Member chk = null;
+		for (Member you : md.mems) {
+			if(mem.equals(you)) {
+				chk = you;
+				break;
+			}
+		}
+		if(chk!=null) {
+			msg="로그인 성공";
+			response.addCookie(new Cookie("pid",chk.getPid()));
+			response.addCookie(new Cookie("pname",chk.getPname()));
+		}
+		
+		mm.addAttribute("msg",msg);
+		return "cookie/alert";
+	}
+}

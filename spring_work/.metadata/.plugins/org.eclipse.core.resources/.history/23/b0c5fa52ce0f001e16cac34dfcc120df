@@ -1,0 +1,56 @@
+package com.example.demo.model;
+
+import java.util.ArrayList;
+
+public class Stud implements Comparable<Stud>{
+
+	String name;
+	int kor, eng, mat, rank;
+	
+	public int tot() {
+		return kor+eng+mat;
+	}
+	public int avg() {
+		return tot()/3;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getKor() {
+		return kor;
+	}
+	public void setKor(int kor) {
+		this.kor = kor;
+	}
+	public int getEng() {
+		return eng;
+	}
+	public void setEng(int eng) {
+		this.eng = eng;
+	}
+	public int getMat() {
+		return mat;
+	}
+	public void setMat(int mat) {
+		this.mat = mat;
+	}
+	public int getRank() {
+		return rank;
+	}
+	public void setRank(ArrayList<Stud> studs) {
+		rank = 1;
+		for (Stud st : studs) {
+			if(avg() < st.avg()) {
+				rank++;
+			}
+		}
+	}
+	@Override
+	public String toString() {
+		return "Stud [name=" + name + ", kor=" + kor + ", eng=" + eng + ", mat=" + mat + ", rank=" + rank + "]";
+	}
+	
+}

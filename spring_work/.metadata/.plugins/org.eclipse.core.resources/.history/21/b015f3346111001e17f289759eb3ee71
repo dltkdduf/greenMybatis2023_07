@@ -1,0 +1,39 @@
+package com.example.demo.control;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.demo.model.Member;
+
+@Controller
+public class ModelController {
+
+	@ModelAttribute //attribute 이름은 리턴 클래스 의 bean 이름
+	                //member
+					//메소드 이름과 상관없음
+	Member member_1() {
+		return new Member("박찬빈", 25, false);
+	}
+	
+	@ModelAttribute("mem2")  //같은 이름이라 누가 출력될지 신뢰할 수 없음
+	Member member_2() {
+	return new Member("박더운빈", 27, true);
+	}
+	
+	@ModelAttribute("mem2") //같은 이름으로 attribute 지정시 어느 것이 나중에 매핑될지 모름
+							// 절대 중첩시키지 말 것
+	  						//같은 이름이라 누가 출력될지 신뢰할 수 없음
+	Member member_22() {
+	return new Member("박빈빈", 33, false);
+	}
+	
+	
+	
+	@RequestMapping("/model/model_1")
+	String model_1(Model mm) {
+		mm.addAttribute("title","model_1");
+		return "model/view";
+	}
+}

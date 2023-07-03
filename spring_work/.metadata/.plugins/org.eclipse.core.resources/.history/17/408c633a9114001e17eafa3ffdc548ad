@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>joinForm</title>
+<style>
+.e_msg{
+	color: #f00;
+}
+</style>
+</head>
+<body>
+<h1>joinForm</h1>
+<form action="joinGo" method="post" th:object="${member}">
+<table border="">
+	<tr>
+		<td>아이디</td>
+		<td><input type="text" name="pid" />
+		<p class="e_msg">에러다<p>
+		</td>
+	</tr>
+	<tr>
+		<td>암호</td>
+		<td><input type="text" name="pw1" /></td>
+	</tr>
+	<tr>
+		<td>암호확인</td>
+		<td><input type="text" name="pw2" /></td>
+	</tr>
+	<tr>
+		<td>이름</td>
+		<td><input type="text" name="pname" /></td>
+	</tr>
+	<tr>
+		<td>이메일</td>
+		<td><input type="text" name="email" /></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<input type="submit" value="회원가입" />
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

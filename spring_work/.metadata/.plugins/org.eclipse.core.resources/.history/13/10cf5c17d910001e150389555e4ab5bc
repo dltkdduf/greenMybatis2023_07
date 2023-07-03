@@ -1,0 +1,32 @@
+package com.example.demo.control;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+
+
+@Controller
+public class RedirectController {
+
+	@RequestMapping("re_1")
+	public String reeee_1(Model mm) {
+		
+		mm.addAttribute("msg", "나 간다");
+		mm.addAttribute("goUrl", "/");
+		return "basic/alert";
+	}
+	
+	@RequestMapping("re_2")
+	public String reeee_2(Model mm) {
+		
+		System.out.println("reeee_2 실행");
+		return "/";   //redirect 가 아님 view page 를 forwarding 시도하여 에러발생
+	}
+	@RequestMapping("re_3")
+	public String reeee_3(Model mm) {
+		
+		System.out.println("reeee_3 실행");
+		return "redirect:/";   //redirect 진행 -->  view page 진입안함
+	}
+}

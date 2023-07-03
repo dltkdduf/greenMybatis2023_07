@@ -1,0 +1,29 @@
+package aaa.control;
+
+import java.util.Date;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import aaa.model.HandPhone;
+
+@Controller
+public class HomeController {
+
+	@RequestMapping("/")
+	String home(Model mm) {
+		System.out.println("home 실행");
+		mm.addAttribute("now", new Date());
+		mm.addAttribute("phone", new HandPhone());
+		return "index";
+	}
+	
+	@RequestMapping("/basic/var")
+	String vaR(Model mm) {
+		System.out.println("VAR 실행");
+		mm.addAttribute("now", new Date());
+		mm.addAttribute("phone", new HandPhone());
+		return "basic/var";
+	}
+}
